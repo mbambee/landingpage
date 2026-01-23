@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from './sections/header';
-import {Footer}   from './sections/footer';
+import { Footer } from './sections/footer';
+import { LanguageProvider } from './i18n/LanguageContext';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,11 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Header />
-        {children}
-        <Footer />
+        <LanguageProvider>
+          <Header />
+          {children}
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );
