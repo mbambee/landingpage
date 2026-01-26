@@ -54,6 +54,9 @@ const translations: Record<Lang, Record<string, string>> = {
     "contact.label.subject": "sujet",
     "contact.label.message": "message",
     "contact.send": "Envoyer",
+  "contact.success": "Message envoyé — merci ! Nous vous répondrons bientôt.",
+  "contact.error.fill": "Veuillez remplir tous les champs requis.",
+  "contact.error.network": "Erreur d'envoi. Veuillez réessayer plus tard.",
 
     "avis.heading": "L’IMPACT DE NOS STRATÉGIES",
     "footer.copyright": "visioad. Tous droits réservés.",
@@ -101,6 +104,9 @@ const translations: Record<Lang, Record<string, string>> = {
     "contact.label.subject": "subject",
     "contact.label.message": "message",
     "contact.send": "Send",
+  "contact.success": "Message sent — thank you! We'll get back to you soon.",
+  "contact.error.fill": "Please fill in all required fields.",
+  "contact.error.network": "Error sending message. Please try again later.",
 
     "avis.heading": "THE IMPACT OF OUR STRATEGIES",
     "footer.copyright": "visioad. All rights reserved.",

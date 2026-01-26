@@ -12,17 +12,11 @@ export const Header = () => {
           <Image src="/logo.png" alt="Logo" width={90} height={60}  />
       </div>
 
-      <nav  className=" flex items-center justify-center space-x-30 sticky w-xl uppercase tracking-tight font-semibold text-[15px]">
-          <div className="space-x-8">
-              <a href="#home" className="text-red-500 hover:text-white">{t("nav.home")}</a>
-
-              <a href="#about" className="text-red-500 hover:text-white">{t("nav.about")}</a>
-          </div>
-          <div className="space-x-8 ">
-              <a href="#services" className=" text-red-500 hover:text-white">{t("nav.services").toUpperCase()}</a>
-
-              <a href="#Avis" className="text-red-500 hover:text-white">{t("nav.reviews")}</a>
-          </div>
+      <nav  className=" flex items-center justify-center space-x-15 sticky w-xl uppercase tracking-tight font-semibold text-[15px]">
+              <a href="#home" className="text-white hover:text-red-500">{t("nav.home")}</a>
+              <a href="#about" className="text-white hover:text-red-500">{t("nav.about")}</a>
+              <a href="#services" className=" text-white hover:text-red-500">{t("nav.services").toUpperCase()}</a>
+              <a href="#Avis" className="text-white hover:text-red-500">{t("nav.reviews")}</a>
       </nav>
       
       <div>

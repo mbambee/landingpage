@@ -16,14 +16,18 @@ export const Footer = () => {
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider">Restez connecté</h4>
             <p className="mt-4 text-sm text-white">Inscrivez-vous pour nos dernières mises à jour.</p>
             <div className="mt-4 flex">
-              <input
-                type="email"
-                placeholder="Votre email"
-                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-l-lg focus:outline-none focus:ring-1 focus:ring-red-500"
-              />
+              <form action="https://formspree.io/f/xgokkkrn" method="post" className="flex w-full">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Votre email"
+                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-l-lg focus:outline-none focus:ring-1 focus:ring-red-500"
+                />
+            
               <button className="bg-red-600 text-white px-4 py-2 text-sm font-medium rounded-r-lg hover:bg-red-700 transition-colors">
-                OK
-              </button>
+                Envoyer
+              </button>  
+              </form>
             </div>
           </div>
           <div>
