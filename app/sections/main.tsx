@@ -2,7 +2,8 @@
 import Image from 'next/image';
 import { useState } from "react";
 import { useLanguage } from "../i18n/LanguageContext";
-import ServicesSection from "../animation/servicstyle";
+import FadeInUp from "../animation/FadeInUp";
+import { motion } from 'framer-motion';
 
 
 export const MainSection = () => {
@@ -85,9 +86,16 @@ function ContactForm({ action, compact }: { action: string; compact?: boolean })
       <textarea name="message" className={inputClass} rows={4}></textarea>
 
       <div className="flex items-center gap-4">
-        <button type="submit" disabled={status === 'loading'} className={compact ? 'btn' : 'border-2 border-red-500 bg-white text-black text-lg rounded-md p-2 w-30 hover:text-red-500'}>
+        <motion.button
+          type="submit"
+          disabled={status === 'loading'}
+          className={compact ? 'btn' : 'border-2 border-red-500 bg-white text-black text-lg rounded-md p-2 w-30 hover:text-red-500'}
+          whileHover={{ scale: 1.04, y: -4, transition: { duration: 0.14 } }}
+          whileTap={{ scale: 0.97 }}
+        >
           {t('contact.send')}
-        </button>
+        </motion.button>
+
         {status === 'loading' && <span className="text-gray-600">...</span>}
       </div>
 
@@ -113,14 +121,23 @@ function Hero() {
         <h1 className="mt-6 text-5xl md:text-6xl font-extrabold text-gray-900 tracking-tight leading-18 flex flex-col ">
           <div>{t("hero.title.line1")}</div><div>{t("hero.title.line2")}</div><div>{t("hero.title.line3")}</div><div>{t("hero.title.line4")}</div><div>{t("hero.title.line5")}</div>
         </h1>
+        <FadeInUp>
         <p className="mt-15 text-2xl text-gray-600 leading-3  flex flex-col ">
           <span>{t("hero.subtitle")}</span>
           <span>{t("hero.subtitle2")}</span>
         </p>
         <div className="mt-10 flex  gap-x-6">
-          <button className="btn font-extrabold"><a href="#Contact">{t("hero.cta")}</a>
-          </button>
+          <motion.a
+            href="#Contact"
+            className="btn font-extrabold inline-block"
+            whileHover={{ scale: 1.06, y: -6, transition: { duration: 0.18 } }}
+            whileTap={{ scale: 0.97 }}
+            aria-label={t("hero.cta")}
+          >
+            {t("hero.cta")}
+          </motion.a>
         </div>
+        </FadeInUp>
       </div>
     </section>
   );
@@ -133,9 +150,10 @@ function About() {
     <section id='about' className="py-20 h-80 bg-[#FCF6F6] scroll-mt-40">
       <div className="w-9xl bg-[#FCF6F6] mx-auto px-4  flex justify-center items-center gap-20 ">
         <h1 className="text-3xl md:text-5xl tracking-tight text-slate-900 font-extrabold"><div>{t("about.title")}</div><div>{t("about.title2")}</div></h1>
+        <FadeInUp>
         <p className="text-gray-600  text-2xl w-3xl">
           {t("about.text")}
-        </p>
+        </p></FadeInUp>
       </div>
     </section>
   );
@@ -168,13 +186,17 @@ function Services() {
         <p className='text-gray-600 text-2xl'>{t("services.description")}</p><br />
 
         <div className=" space-y-4 gap-4 p-6 -mx-8">
-
-            {service.map((service, index) => (
-              <div
-                key={index}
-                className={`transition-all duration-300 ease-in-out border rounded-2xl p-6 cursor-pointer flex-col  overflow-hidden
-                  ${openIndex === index ? 'flex-2 bg-white shadow-lg' : 'flex-1 bg-gray-50'}`}
+          {service.map((service, index) => (
+            <FadeInUp key={index} delay={index * 0.06}>
+              <motion.div
+                className={`transition-all duration-300 ease-in-out border rounded-2xl p-6 flex-col  overflow-hidden
+                  ${openIndex === index ? 'flex-2 bg-white shadow-lg' : 'flex-1 bg-gray-50'} cursor-pointer`}
                 onClick={() => toggleAccordion(index)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if ((e as React.KeyboardEvent).key === 'Enter') toggleAccordion(index); }}
+                whileHover={{ scale: 1.05, y: -8, transition: { duration: 0.18 } }}
+                whileTap={{ scale: 0.97 }}
               >
                 <div className="flex justify-between items-start">
                   <h3 className={`font-bold text-xl uppercase transition-colors ${openIndex === index ? 'text-black' : 'text-gray-800'}`}>
@@ -189,8 +211,10 @@ function Services() {
                     {service.desc}
                   </p>
                 </div>
-              </div>
-            ))}
+              </motion.div>
+              
+            </FadeInUp>
+          ))}
         </div>
         
       </div>
@@ -221,21 +245,23 @@ function Avis() {
         <h2 className="text-4xl  text-center mb-12 text-black font-extrabold">{t("avis.heading")}</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 ml-30 gap-8  bg-[#FCF6F6]">
           {service.map((s, i) => (
-            <div key={i} className="divs w-100 h-100 bg-white  ">
-              <div className='flex gap-2 mb-4'>
-                {Array.from({ length: s.etoile }).map((_, index) => (
-                  <Image key={index} src="/star.png" width={20} height={20} alt="star" />
-                ))}
-              </div>
-              <p className="text-gray-600 text-xl">{s.desc}</p>
-              <div className='flex items-center gap-4 mt-6'>
-                <Image src={s.image} width={70} height={70} alt={s.name} className="rounded-full " />
-                <div className='flex flex-col'>
-                  <p className='text-black font-bold text-xl'>{s.name}</p>
-                  <p className='text-gray-600'>{s.dis}</p>
+            <FadeInUp key={i} delay={i * 0.06}>
+              <div className="divs w-100 h-100 bg-white  ">
+                <div className='flex gap-2 mb-4'>
+                  {Array.from({ length: s.etoile }).map((_, index) => (
+                    <Image key={index} src="/star.png" width={20} height={20} alt="star" />
+                  ))}
+                </div>
+                <p className="text-gray-600 text-xl">{s.desc}</p>
+                <div className='flex items-center gap-4 mt-6'>
+                  <Image src={s.image} width={70} height={70} alt={s.name} className="rounded-full " />
+                  <div className='flex flex-col'>
+                    <p className='text-black font-bold text-xl'>{s.name}</p>
+                    <p className='text-gray-600'>{s.dis}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </FadeInUp>
           ))}
         </div>
       </div>
@@ -253,7 +279,7 @@ function Contact() {
     <section id='Contact' className="py-20 bg-white flex scroll-mt-40 ">
 
 
-      <div className='flex w-2xl  flex-col  mx-auto px-4 h-full mt-25 '>
+  <FadeInUp className='flex w-2xl  flex-col  mx-auto px-4 h-full mt-25 '>
         <div className='mb-8 flex flex-col'>
           <h2 className="text-4xl  mb-12 text-black uppercase font-extrabold">{t("contact.heading")}</h2>
           <h4 className="text-2xl font-semibold mb-4 text-black">{t("contact.subtitle")}</h4>
@@ -277,12 +303,12 @@ function Contact() {
         </div>
 
 
-      </div>
-      <div className=' w-xl  mb-8 mr-5 rounded-2xl  text-black font-bold text-xl  bg-[#FCF6F6] '>
+      </FadeInUp>
+      <FadeInUp className=' w-xl  mb-8 mr-5 rounded-2xl  text-black font-bold text-xl  bg-[#FCF6F6] '>
         <div className='  p-10 flex flex-col '>
           <ContactForm action="https://formspree.io/f/meeggebj" />
         </div>
-      </div>
+      </FadeInUp>
     </section>
   );
 }
