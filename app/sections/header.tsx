@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useLanguage } from "../i18n/LanguageContext";
+import { motion } from 'framer-motion'
 
 export const Header = () => {
   const { lang, setLang, t } = useLanguage();
@@ -12,11 +13,29 @@ export const Header = () => {
           <Image src="/logo.png" alt="Logo" width={90} height={60}  />
       </div>
 
-      <nav  className=" flex items-center justify-center space-x-15 sticky w-xl uppercase tracking-tight font-semibold text-[15px]">
-              <a href="#home" className="text-white hover:text-red-500">{t("nav.home")}</a>
-              <a href="#about" className="text-white hover:text-red-500">{t("nav.about")}</a>
-              <a href="#services" className=" text-white hover:text-red-500">{t("nav.services").toUpperCase()}</a>
-              <a href="#Avis" className="text-white hover:text-red-500">{t("nav.reviews")}</a>
+      <nav className="flex items-center justify-center sticky w-xl uppercase tracking-tight font-semibold text-[15px]">
+        <motion.ul
+          className="flex items-center space-x-15"
+          initial="hidden"
+          animate="show"
+          variants={{
+            hidden: {},
+            show: { transition: { staggerChildren: 0.06 } }
+          }}
+        >
+          {[
+            { href: '#home', label: t('nav.home') },
+            { href: '#about', label: t('nav.about') },
+            { href: '#services', label: t('nav.services').toUpperCase() },
+            { href: '#Avis', label: t('nav.reviews') },
+          ].map((item, idx) => (
+            <motion.li key={idx} variants={{ hidden: { opacity: 0, y: -6 }, show: { opacity: 1, y: 0, transition: { duration: 0.18 } } }}>
+              <a href={item.href} className="text-white hover:text-red-500">
+                {item.label}
+              </a>
+            </motion.li>
+          ))}
+        </motion.ul>
       </nav>
       
       <div>

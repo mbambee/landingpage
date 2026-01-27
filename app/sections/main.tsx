@@ -1,8 +1,10 @@
 "use client";
 import Image from 'next/image';
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useLanguage } from "../i18n/LanguageContext";
 import FadeInUp from "../animation/FadeInUp";
+import BlurInText from "../animation/BlurInText";
+import ScrollLinked from "../animation/ScrollLinked";
 import { motion } from 'framer-motion';
 
 
@@ -109,6 +111,26 @@ function ContactForm({ action, compact }: { action: string; compact?: boolean })
 function Hero() {
   const { t } = useLanguage();
 
+  // Magnetic red CTA button: follows cursor when hovering and springs back on leave
+  const btnRef = useRef<HTMLAnchorElement | null>(null);
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+
+  const handleMagnetMove = (e: React.MouseEvent) => {
+    const el = (e.currentTarget as HTMLElement);
+    const rect = el.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = e.clientX - cx;
+    const dy = e.clientY - cy;
+    const max = 18; // max drift in px
+    // scale down influence so movement is subtle
+    const x = Math.max(-max, Math.min(max, dx * 0.22));
+    const y = Math.max(-max, Math.min(max, dy * 0.22));
+    setOffset({ x, y });
+  };
+
+  const handleMagnetLeave = () => setOffset({ x: 0, y: 0 });
+
   return (
     <section id='home' className=" flex items-center justify-center bg-white px-6 py-10 relative  h-screen scroll-mt-20">
 
@@ -127,15 +149,24 @@ function Hero() {
           <span>{t("hero.subtitle2")}</span>
         </p>
         <div className="mt-10 flex  gap-x-6">
-          <motion.a
-            href="#Contact"
-            className="btn font-extrabold inline-block"
-            whileHover={{ scale: 1.06, y: -6, transition: { duration: 0.18 } }}
-            whileTap={{ scale: 0.97 }}
-            aria-label={t("hero.cta")}
+          <div
+            onMouseMove={handleMagnetMove}
+            onMouseLeave={handleMagnetLeave}
+            className="inline-block"
+            aria-hidden={false}
           >
-            {t("hero.cta")}
-          </motion.a>
+            <motion.a
+              ref={btnRef}
+              href="#Contact"
+              className="btn font-extrabold inline-block bg-red-600 text-white hover:bg-red-700"
+              animate={{ x: offset.x, y: offset.y }}
+              transition={{ type: 'spring', stiffness: 250, damping: 22 }}
+              whileTap={{ scale: 0.96 }}
+              aria-label={t("hero.cta")}
+            >
+              {t("hero.cta")}
+            </motion.a>
+          </div>
         </div>
         </FadeInUp>
       </div>
@@ -151,9 +182,8 @@ function About() {
       <div className="w-9xl bg-[#FCF6F6] mx-auto px-4  flex justify-center items-center gap-20 ">
         <h1 className="text-3xl md:text-5xl tracking-tight text-slate-900 font-extrabold"><div>{t("about.title")}</div><div>{t("about.title2")}</div></h1>
         <FadeInUp>
-        <p className="text-gray-600  text-2xl w-3xl">
-          {t("about.text")}
-        </p></FadeInUp>
+          <BlurInText text={t("about.text")} className="text-gray-600 text-2xl w-3xl" />
+        </FadeInUp>
       </div>
     </section>
   );
@@ -230,40 +260,48 @@ function Services() {
   );
 }
 
-
 function Avis() {
   const { t } = useLanguage();
   const service = [
-    { etoile: 4, desc: "VISIOAD a conçu notre site avec un design soigné et une expérience optimale, renforçant notre présence en ligne.", image: "/lucas.png", name: "Lucas Martin", dis: "Responsable de la marque" },
-    { etoile: 4, desc: "De la conception au marketing, l’expertise et la stratégie de VISIOAD ont renforcé notre succès numérique.", image: "/david.png", name: "David Carter", dis: "Responsable de la stratégie" },
-    { etoile: 4, desc: "Grâce à VISIOAD, notre entreprise a connu un essor significatif de sa présence en ligne grâce à leurs campagnes digitales ciblées.", image: "/sophie.png", name: "Sophie Lambert", dis: "Directeur du marketing" },
+    { etoile: 4, image: "/lucas.png" },
+    { etoile: 4, image: "/david.png" },
+    { etoile: 4, image: "/sophie.png" },
+    { etoile: 4, image: "/sophia.svg" },
+    { etoile: 4, image: "/liam.svg" },
+    { etoile: 4, image: "/ethan.svg" },
   ];
   return (
     <section id='Avis' className="py-20 bg-[#FCF6F6] flex scroll-mt-40 ">
 
       <div className='bg-[#FCF6F6] flex  flex-col  mx-auto px-4 w-full '>
         <h2 className="text-4xl  text-center mb-12 text-black font-extrabold">{t("avis.heading")}</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 ml-30 gap-8  bg-[#FCF6F6]">
+        <FadeInUp>
+          <div className="flex justify-center mb-10">
+          
+          </div>
+     
+        <ScrollLinked>
           {service.map((s, i) => (
-            <FadeInUp key={i} delay={i * 0.06}>
-              <div className="divs w-100 h-100 bg-white  ">
+            <li key={i} className="flex-none w-80">
+              <div className="divs w-100 h-100 bg-white p-6">
                 <div className='flex gap-2 mb-4'>
                   {Array.from({ length: s.etoile }).map((_, index) => (
                     <Image key={index} src="/star.png" width={20} height={20} alt="star" />
                   ))}
                 </div>
-                <p className="text-gray-600 text-xl">{s.desc}</p>
+                <p className="text-gray-600 text-xl">{t(`avis.${i}.desc`)}</p>
                 <div className='flex items-center gap-4 mt-6'>
-                  <Image src={s.image} width={70} height={70} alt={s.name} className="rounded-full " />
+                  <Image src={s.image} width={70} height={70} alt={t(`avis.${i}.name`)} className="rounded-full " />
                   <div className='flex flex-col'>
-                    <p className='text-black font-bold text-xl'>{s.name}</p>
-                    <p className='text-gray-600'>{s.dis}</p>
+                    <p className='text-black font-bold text-xl'>{t(`avis.${i}.name`)}</p>
+                    <p className='text-gray-600'>{t(`avis.${i}.role`)}</p>
                   </div>
                 </div>
               </div>
-            </FadeInUp>
+            </li>
           ))}
-        </div>
+        </ScrollLinked>
+           </FadeInUp>
       </div>
     </section>
   );
@@ -288,16 +326,42 @@ function Contact() {
         </div>
         <hr />
         <div className='flex  gap-50 mt-4 w-full '>
-          <div className=''>
-            <a href="https://www.facebook.com/visioad/"><Image src="/facebook.png" width={24} height={24} alt="facebook image" /></a>
+          <div className="flex flex-col ">
+            <motion.a
+              href="https://www.facebook.com/visioad/"
+              whileHover={{ scale: 1.06, y: -6, transition: { duration: 0.18 } }}
+              whileTap={{ scale: 0.97 }}
+              aria-label="Facebook"
+              className="inline-block"
+            >
+              <Image src="/facebook.png" width={24} height={24} alt="facebook image" />
+            </motion.a>
             <p className=' mt-2 text-2xl text-black'>facebook</p>
           </div>
-          <div>
-            <a href="https://www.instagram.com/ste_visioad/"><Image src="/instagram.png" width={24} height={24} alt="instagram image" /></a>
+
+          <div className="flex flex-col ">
+            <motion.a
+              href="https://www.instagram.com/ste_visioad/"
+              whileHover={{ scale: 1.06, y: -6, transition: { duration: 0.18 } }}
+              whileTap={{ scale: 0.97 }}
+              aria-label="Instagram"
+              className="inline-block"
+            >
+              <Image src="/instagram.png" width={24} height={24} alt="instagram image" />
+            </motion.a>
             <p className=' mt-2 text-2xl text-black'>instagram</p>
           </div>
-          <div>
-            <a href="https://www.youtube.com/@visoad "><Image src="/youtube.png" width={24} height={24} alt="youtube image" /></a>
+
+          <div className="flex flex-col ">
+            <motion.a
+              href="https://www.youtube.com/@visoad"
+              whileHover={{ scale: 1.06, y: -6, transition: { duration: 0.18 } }}
+              whileTap={{ scale: 0.97 }}
+              aria-label="YouTube"
+              className="inline-block"
+            >
+              <Image src="/youtube.png" width={24} height={24} alt="youtube image" />
+            </motion.a>
             <p className=' mt-2 text-2xl text-black '>youtube</p>
           </div>
         </div>
