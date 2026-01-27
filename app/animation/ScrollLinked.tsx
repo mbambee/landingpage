@@ -64,15 +64,23 @@ function StyleSheet() {
             .scroll-linked-list {
                 display: flex;
                 list-style: none;
-                gap: 20px;
+                gap: 0; /* we use explicit margins on items to control spacing between blocks */
                 overflow-x: auto;
                 padding: 20px 0;
                 margin: 0;
                 -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x mandatory;
             }
 
+            /* spacing between the outer blocks (not inside the card content) */
             .scroll-linked-list li {
                 flex: 0 0 auto;
+                margin: 0 1rem; /* horizontal space between card blocks */
+                scroll-snap-align: start;
+            }
+
+            .scroll-linked-list li:last-child {
+                margin-right: 0; /* no extra space after last item */
             }
 
             .scroll-linked-list::-webkit-scrollbar {

@@ -35,7 +35,7 @@ export default function BlurInText({ text, className = '', delay = 0 }: Props) {
       variants={container}
       initial="hidden"
       whileInView="show"
-      viewport={{  amount: 0.2 }} //once: true,
+      viewport={{ once: true, amount: 0.2 }} 
     >
       {parts.map((part, i) => {
         // render whitespace as regular text node to avoid focusable spans
