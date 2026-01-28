@@ -30,7 +30,7 @@ export default function Hero() {
   const handleMagnetLeave = () => setOffset({ x: 0, y: 0 });
 
   return (
-    <section id='home' className=" flex items-center justify-center bg-white px-6 py-10 relative  h-screen scroll-mt-20">
+    <section  className=" flex items-center justify-center bg-white px-6 py-10 relative  h-screen scroll-mt-20">
 
       <div className='w-1/2 h-full absolute right-0 top-0  '>
         <Image src="/HeroPic.jpg" alt="Hero Image" fill className="object-cover  " priority />

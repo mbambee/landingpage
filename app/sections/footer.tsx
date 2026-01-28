@@ -46,20 +46,20 @@ export const Footer = () => {
           </div>
 
           {/* NEWSLETTER */}
-          <motion.div variants={item} className="w-full max-w-sm">
-            <h4 className="text-sm font-semibold text-white uppercase tracking-wider">Restez connecté</h4>
-            <p className="mt-4 text-sm text-gray-400">Inscrivez-vous pour nos dernières mises à jour.</p>
+            <motion.div variants={item} className="w-full max-w-sm">
+            <h4 className="text-sm font-semibold text-white uppercase tracking-wider">{t('footer.newsletter.title')}</h4>
+            <p className="mt-4 text-sm text-gray-400">{t('footer.newsletter.desc')}</p>
             <div className="mt-4">
               <form action="https://formspree.io/f/xgokkkrn" method="post" className="flex">
                 <input
                   type="email"
                   name="email"
-                  placeholder="Votre email"
+                  placeholder={t('footer.newsletter.placeholder')}
                   // Bordure changée en gris foncé/ardoise pour être plus "pro"
                   className="w-full px-3 py-2 text-sm text-black bg-white border border-slate-700 rounded-l-lg focus:ring-2 focus:ring-red-500 outline-none"
                 />
                 <button className="bg-red-600 text-white px-4 py-2 text-sm font-bold rounded-r-lg hover:bg-red-700 transition-colors">
-                  Envoyer
+                  {t('footer.newsletter.submit')}
                 </button>
               </form>
             </div>
@@ -88,10 +88,10 @@ export const Footer = () => {
           {/* RÉSEAUX SOCIAUX : On garde tes tailles originales (60x50) */}
           <div className="flex items-center justify-center gap-4">
             {[
-              { href: "https://www.instagram.com/ste_visioad/", src: "/instagram.png", label: "Instagram" },
-              { href: "https://www.facebook.com/visioad/", src: "/facebook.png", label: "Facebook" },
-              { href: "https://www.youtube.com/@visoad", src: "/youtube.png", label: "YouTube" },
-              { href: "https://www.tiktok.com/@visioad", src: "/tik-tok (1).png", label: "TikTok" }
+              { href: "https://www.instagram.com/ste_visioad/", src: "/instagram.png", key: 'instagram', label: t('contact.social.instagram') },
+              { href: "https://www.facebook.com/visioad/", src: "/facebook.png", key: 'facebook', label: t('contact.social.facebook') },
+              { href: "https://www.youtube.com/@visoad", src: "/youtube.png", key: 'youtube', label: t('contact.social.youtube') },
+              { href: "https://www.tiktok.com/@visioad", src: "/tik-tok (1).png", key: 'tiktok', label: t('contact.social.tiktok') }
             ].map((social, idx) => (
               <motion.a 
                 key={idx}

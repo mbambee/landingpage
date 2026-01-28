@@ -26,7 +26,7 @@ export default function Services() {
   return (
     // Structure : flex-col (mobile) -> lg:flex-row (PC)
     // On centre le tout et on ajoute du padding pour que ça ne touche pas les bords
-    <section id='services' className="py-20 bg-white flex flex-col lg:flex-row justify-center items-start gap-10 lg:gap-24 px-6 max-w-[1400px] mx-auto scroll-mt-40">
+    <section  className="py-20 bg-white flex flex-col lg:flex-row justify-center items-start gap-10 lg:gap-24 px-6 max-w-[1400px] mx-auto scroll-mt-40">
       
       {/* --- BLOC SERVICES (GAUCHE SUR PC / HAUT SUR MOBILE) --- */}
       {/* w-full sur mobile, w-[700px] environ sur PC */}

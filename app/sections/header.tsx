@@ -10,7 +10,7 @@ export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { href: '#home', label: t('nav.home') },
+    { href: '#acceuil', label: t('nav.home') },
     { href: '#about', label: t('nav.about') },
     { href: '#services', label: t('nav.services').toUpperCase() },
     { href: '#Avis', label: t('nav.reviews') },
@@ -20,20 +20,20 @@ export const Header = () => {
     <>
       {/* --- VERSION PC (Noir Pur, Sticky) --- */}
       <header className="hidden lg:block bg-black w-full sticky top-0 z-[200] border-b border-white/5">
-        <div className="max-w-7xl mx-auto flex items-center h-24 px-6 justify-between">
+        <div className="max-w-7xl md:mx-auto flex items-center h-24 px-6 justify-between">
           <div className="flex items-center">
             <Image src="/logo.png" alt="Logo" width={80} height={50} className="object-contain" priority />
           </div>
 
-          <nav className="flex items-center justify-center">
-            <ul className="flex items-center space-x-12">
+          <nav className="flex items-center justify-center ">
+            <ul className="flex items-center space-x-12 ">
               {navLinks.map((item, idx) => (
                 <motion.li 
                   key={idx}
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.1 }}
-                  className="uppercase tracking-widest font-bold text-[13px]"
+                  className="uppercase tracking-widest font-bold text-[13px] font-extrabold"
                 >
                   <a href={item.href} className="text-white hover:text-red-500 transition-colors">
                     {item.label}
@@ -59,8 +59,8 @@ export const Header = () => {
       {/* --- VERSION MOBILE (Flou Backdrop, Fixed) --- */}
       <header className="lg:hidden fixed top-0 left-0 w-full z-[100] bg-black/60 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="relative w-32 h-12">
-            <Image src="/logo.png" alt="Logo" fill className="object-contain" priority />
+          <div className="relative  w-32 h-12">
+            <Image src="/logo.png" alt="Logo" width={50} height={15} className="object-contain" priority />
           </div>
 
           <div className="flex items-center gap-6">

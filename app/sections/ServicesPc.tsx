@@ -21,7 +21,7 @@ export default function Services() {
 
     return (
 
-        <section id='services' className="py-20 bg-white flex scroll-mt-40">
+        <section  className="py-20 bg-white flex scroll-mt-40">
             <div className='flex  w-3xl  flex-col   mx-auto px-4 '>
                 <h2 className="text-3xl md:text-5xl tracking-tight text-slate-900 font-extrabold mb-5">{t("services.heading")}</h2>
                 <p className='text-gray-600 text-2xl'>{t("services.description")}</p><br />

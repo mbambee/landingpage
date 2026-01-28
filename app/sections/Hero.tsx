@@ -27,7 +27,7 @@ export default function Hero() {
   const handleMagnetLeave = () => setOffset({ x: 0, y: 0 });
 
   return (
-    <section id='home' className="relative flex items-center justify-center min-h-screen md:h-screen overflow-hidden bg-black pt-24 md:pt-0">
+    <section  className="relative flex items-center justify-center min-h-screen md:h-screen overflow-hidden bg-black pt-24 md:pt-0">
       
       {/* IMAGE DE FOND - Mode immersif pro */}
       <div className='absolute inset-0 z-0'>

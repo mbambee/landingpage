@@ -84,6 +84,10 @@ const translations: Record<Lang, Record<string, string>> = {
     "avis.5.name": "Ethan Parker",
     "avis.5.role": "PDG",
     "footer.copyright": "visioad. Tous droits réservés.",
+  "footer.newsletter.title": "Restez connecté",
+  "footer.newsletter.desc": "Inscrivez-vous pour nos dernières mises à jour.",
+  "footer.newsletter.placeholder": "Votre email",
+  "footer.newsletter.submit": "Envoyer",
   },
   en: {
     "nav.home": "Home",
@@ -158,6 +162,10 @@ const translations: Record<Lang, Record<string, string>> = {
     "avis.5.name": "Ethan Parker",
     "avis.5.role": "CEO",
     "footer.copyright": "visioad. All rights reserved.",
+  "footer.newsletter.title": "Stay connected",
+  "footer.newsletter.desc": "Sign up for our latest updates.",
+  "footer.newsletter.placeholder": "Your email",
+  "footer.newsletter.submit": "Send",
   },
 };
 
