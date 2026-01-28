@@ -45,7 +45,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "service.5.title": "Surveillance CCTV",
     "service.5.desc": "Assurez la sécurité avec surveillance CCTV 24/7, alertes en temps réel et accès à distance, partout et à tout moment.",
 
-    "faq.prompt": "Tu ne trouves pas ta réponse ?",
+    "faq.prompt": "Vous ne trouvez pas votre réponse ?",
     "contact.heading": "Contactez-nous",
     "contact.subtitle": "Obtenez un devis gratuit",
     "contact.paragraph": "Discutons de votre projet !Contactez-nous en envoyant un message, et notre équipe vous répondra dans un délai d'un jour ouvré. Que vous ayez des questions ou ayez besoin d'une solution sur mesure, nous sommes là pour vous aider à concrétiser votre vision.",
