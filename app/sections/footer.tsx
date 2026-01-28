@@ -4,7 +4,6 @@ import Image from "next/image";
 import { motion, useReducedMotion } from 'framer-motion';
 import { useLanguage } from "../i18n/LanguageContext";
 
-
 export const Footer = () => {
   const { t } = useLanguage();
   const reduce = useReducedMotion();
@@ -15,7 +14,6 @@ export const Footer = () => {
       opacity: 1,
       scaleY: 1,
       transition: {
-        // shorter duration for a snappier first paint while keeping a subtle unfold
         duration: reduce ? 0.28 : 0.9,
         ease: [0.22, 1, 0.36, 1],
         when: 'beforeChildren',
@@ -31,66 +29,84 @@ export const Footer = () => {
 
   return (
     <motion.footer
-      className="bg-black text-white py-12 px-6 h-60 flex"
+      className="bg-black text-white py-16 px-6 min-h-fit flex flex-col justify-center"
       variants={containerVariants}
       initial="hidden"
       whileInView="show"
-      viewport={{  amount: 0.2 }} //once: true,
+      viewport={{ amount: 0.2 }}
       style={{ transformOrigin: 'top center' }}
     >
-      <motion.div className=" flex  gap-4  -my-6  w-full h-30 flex-col   " variants={item}>
+      <motion.div className="max-w-7xl mx-auto w-full flex flex-col gap-12" variants={item}>
+        
+        <motion.div className="flex flex-col lg:flex-row justify-between items-center lg:items-start gap-12 text-center lg:text-left" variants={item}>
+          
+          {/* LOGO : Masqué sur mobile avec 'hidden lg:block' */}
+          <div className="hidden lg:block flex-shrink-0">
+            <Image src="/logo.png" alt="Logo" width={140} height={90} loading="lazy" />
+          </div>
 
-        <motion.div className="flex  justify-between  " variants={item}>
-          <Image src="/logo.png" alt="Logo" width={140} height={90} loading="lazy" />                    
-          <motion.div variants={item}>
+          {/* NEWSLETTER */}
+          <motion.div variants={item} className="w-full max-w-sm">
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider">Restez connecté</h4>
-            <p className="mt-4 text-sm text-white">Inscrivez-vous pour nos dernières mises à jour.</p>
-            <div className="mt-4 flex">
-              <form action="https://formspree.io/f/xgokkkrn" method="post" className="flex w-full">
+            <p className="mt-4 text-sm text-gray-400">Inscrivez-vous pour nos dernières mises à jour.</p>
+            <div className="mt-4">
+              <form action="https://formspree.io/f/xgokkkrn" method="post" className="flex">
                 <input
                   type="email"
                   name="email"
                   placeholder="Votre email"
-                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-l-lg focus:outline-none focus:ring-1 focus:ring-red-500"
+                  // Bordure changée en gris foncé/ardoise pour être plus "pro"
+                  className="w-full px-3 py-2 text-sm text-black bg-white border border-slate-700 rounded-l-lg focus:ring-2 focus:ring-red-500 outline-none"
                 />
-              
-              <button className="bg-red-600 text-white px-4 py-2 text-sm font-medium rounded-r-lg hover:bg-red-700 transition-colors">
-                Envoyer
-              </button>  
+                <button className="bg-red-600 text-white px-4 py-2 text-sm font-bold rounded-r-lg hover:bg-red-700 transition-colors">
+                  Envoyer
+                </button>
               </form>
             </div>
           </motion.div>
-          <motion.div variants={item}>
-            <h1 className="text-red-500 ">{t("contact.heading")}</h1>
-            <address className=" text-sm flex flex-col mt-4 ">
-              <div>Adresse : Immeuble Centre Ibrahim,</div><div>Av. Habib Bourguiba,</div><div>Sousse 4000</div>
-              <div>Téléphone : +216 31 439 350 </div>
-              <div>Email : Info@visioad.com </div>
+
+          {/* ADRESSE */}
+          <motion.div variants={item} className="flex flex-col">
+            <h1 className="text-red-500 font-bold uppercase mb-4">{t("contact.heading")}</h1>
+            <address className="text-sm text-white  space-y-1">
+              <div>Immeuble Centre Ibrahim,</div>
+              <div>Av. Habib Bourguiba, Sousse 4000</div>
+              <div className="pt-2 text-white">Tél : +216 31 439 350</div>
+              <div className="text-white">Email : Info@visioad.com</div>
             </address>
           </motion.div>
-
-
         </motion.div>
-        <motion.hr className="border-white " variants={item} />
-        <motion.div className=" flex justify-between  items-center my-2" variants={item}>
-          <h3 className="text-sm">&copy; {new Date().getFullYear()} {t("footer.copyright")}</h3>
-          <div className=" flex items-center justify-center gap-4  w-30">
-            <motion.a href="https://www.instagram.com/ste_visioad/" whileHover={{ scale: 1.08, y: -6 }} whileTap={{ scale: 0.97 }} aria-label="Instagram">
-              <Image src="/instagram.png" alt="Instagram" width={60} height={50} loading="lazy" />
-            </motion.a>
-            <motion.a href="https://www.facebook.com/visioad/" whileHover={{ scale: 1.08, y: -6 }} whileTap={{ scale: 0.97 }} aria-label="Facebook">
-              <Image src="/facebook.png" alt="Facebook" width={60} height={50} loading="lazy" />
-            </motion.a>
-            <motion.a href="https://www.youtube.com/@visoad" whileHover={{ scale: 1.08, y: -6 }} whileTap={{ scale: 0.97 }} aria-label="YouTube">
-              <Image src="/youtube.png" alt="YouTube" width={60} height={50} loading="lazy" />
-            </motion.a>
-            <motion.a href="https://www.tiktok.com/@visioad" whileHover={{ scale: 1.08, y: -6 }} whileTap={{ scale: 0.97 }} aria-label="TikTok">
-              <Image src="/tik-tok (1).png" alt="TikTok" width={60} height={50} loading="lazy" />
-            </motion.a>
+
+        <motion.hr className="border-gray-400" variants={item} />
+
+        {/* SECTION BASSE */}
+        <motion.div className="flex flex-col-reverse lg:flex-row justify-between items-center gap-8" variants={item}>
+          <h3 className="text-sm text-white italic">
+            &copy; {new Date().getFullYear()} {t("footer.copyright")}
+          </h3>
+
+          {/* RÉSEAUX SOCIAUX : On garde tes tailles originales (60x50) */}
+          <div className="flex items-center justify-center gap-4">
+            {[
+              { href: "https://www.instagram.com/ste_visioad/", src: "/instagram.png", label: "Instagram" },
+              { href: "https://www.facebook.com/visioad/", src: "/facebook.png", label: "Facebook" },
+              { href: "https://www.youtube.com/@visoad", src: "/youtube.png", label: "YouTube" },
+              { href: "https://www.tiktok.com/@visioad", src: "/tik-tok (1).png", label: "TikTok" }
+            ].map((social, idx) => (
+              <motion.a 
+                key={idx}
+                href={social.href} 
+                whileHover={{ scale: 1.08, y: -6 }} 
+                whileTap={{ scale: 0.97 }} 
+                aria-label={social.label}
+              >
+                <Image src={social.src} alt={social.label} width={20} height={20} loading="lazy" />
+              </motion.a>
+            ))}
           </div>
         </motion.div>
-      </motion.div>
 
+      </motion.div>
     </motion.footer>
   );
 };

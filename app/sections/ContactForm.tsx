@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../i18n/LanguageContext';
 
-// Reusable contact form used in Services (compact) and Contact sections
 export default function ContactForm({ action, compact }: { action: string; compact?: boolean }) {
   const { t } = useLanguage();
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -17,8 +16,8 @@ export default function ContactForm({ action, compact }: { action: string; compa
 
     const form = e.currentTarget;
     const fd = new FormData(form);
-    const email = (fd.get('email') || '').toString().trim();
-    const message = (fd.get('message') || '').toString().trim();
+    const email = fd.get('email')?.toString().trim();
+    const message = fd.get('message')?.toString().trim();
 
     if (!email || !message) {
       setError(t('contact.error.fill') as string);
@@ -28,7 +27,7 @@ export default function ContactForm({ action, compact }: { action: string; compa
 
     try {
       const res = await fetch(action, {
-        method: form.method || 'POST',
+        method: 'POST',
         headers: { Accept: 'application/json' },
         body: fd,
       });
@@ -36,14 +35,9 @@ export default function ContactForm({ action, compact }: { action: string; compa
       if (res.ok) {
         setStatus('success');
         form.reset();
+        setTimeout(() => setStatus('idle'), 5000);
       } else {
-        // try to read JSON error if available
-        let msg = t('contact.error.network') as string;
-        try {
-          const json = await res.json();
-          if (json && json.error) msg = json.error;
-        } catch (_) { }
-        setError(msg);
+        setError(t('contact.error.network') as string);
         setStatus('error');
       }
     } catch (err) {
@@ -52,42 +46,54 @@ export default function ContactForm({ action, compact }: { action: string; compa
     }
   };
 
-  const inputClass = "block border-2 border-gray-300 rounded-md p-2 w-[80%] mb-4";
+  const labelClass = "block text-sm font-bold text-gray-700 uppercase mb-1 ml-1";
+  const inputClass = "block w-full border-2 border-gray-300 rounded-md p-2 mb-4 focus:border-red-500 outline-none transition-colors";
+
   return (
-    <form method="POST" action={action} onSubmit={handleSubmit} className={compact ? 'p-0' : ''}>
-      <label htmlFor="name">{t('contact.label.name')}</label>
-      <input name="name" type="text" className={inputClass} />
+    <form method="POST" action={action} onSubmit={handleSubmit} className="relative">
+      <div className="flex flex-col">
+        <label htmlFor="name" className={labelClass}>{t('contact.label.name')}</label>
+        <input name="name" type="text" className={inputClass} />
 
-      <label htmlFor="email">{t('contact.label.email')}</label>
-      <input name="email" type="email" className={inputClass} />
+        <label htmlFor="email" className={labelClass}>{t('contact.label.email')}</label>
+        <input name="email" type="email" className={inputClass} required />
 
-      {!compact && (
-        <>
-          <label htmlFor="subject">{t('contact.label.subject')}</label>
-          <input name="subject" type="text" className={inputClass} />
-        </>
-      )}
+        {!compact && (
+          <>
+            <label htmlFor="subject" className={labelClass}>{t('contact.label.subject')}</label>
+            <input name="subject" type="text" className={inputClass} />
+          </>
+        )}
 
-      <label htmlFor="message" >{t('contact.label.message')}</label>
-      <textarea name="message" className={inputClass} rows={4}></textarea>
+        <label htmlFor="message" className={labelClass}>{t('contact.label.message')}</label>
+        <textarea name="message" className={inputClass} rows={4} required></textarea>
 
-      <div className="flex items-center gap-4">
-        <motion.button
-          type="submit"
-          disabled={status === 'loading'}
-          className={compact ? 'btn' : 'border-2 border-red-500 bg-white text-black text-lg rounded-md p-2 w-30 hover:text-red-500'}
-          whileHover={{ scale: 1.04, y: -4, transition: { duration: 0.14 } }}
-          whileTap={{ scale: 0.97 }}
-        >
-          {t('contact.send')}
-        </motion.button>
+        <div className="flex items-center gap-4">
+          <motion.button
+            type="submit"
+            disabled={status === 'loading'}
+            // Ton style original exact
+            className={compact ? 'btn' : 'border-2 border-red-500 bg-white text-black text-lg rounded-md p-2 w-40 hover:text-red-500 transition-colors font-bold'}
+            whileHover={{ scale: 1.04, y: -4, transition: { duration: 0.14 } }}
+            whileTap={{ scale: 0.97 }}
+          >
+            {status === 'loading' ? '...' : t('contact.send')}
+          </motion.button>
 
-        {status === 'loading' && <span className="text-gray-600">...</span>}
+          <AnimatePresence>
+            {status === 'success' && (
+              <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-green-600 font-medium">
+                {t('contact.success')}
+              </motion.span>
+            )}
+            {status === 'error' && error && (
+              <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-red-600 font-medium text-sm">
+                {error}
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
-
-      {status === 'success' && <p className="mt-3 text-green-600">{t('contact.success')}</p>}
-      {status === 'error' && error && <p className="mt-3 text-red-600">{error}</p>}
     </form>
   );
 }
-
