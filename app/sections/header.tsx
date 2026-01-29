@@ -19,7 +19,7 @@ export const Header = () => {
   return (
     <>
       {/* --- VERSION PC (Noir Pur, Sticky) --- */}
-      <header className="hidden lg:block bg-black w-full sticky top-0 z-[200] border-b border-white/5">
+      <header className="hidden lg:block bg-black w-full sticky top-0 z-200 border-b border-white/5">
         <div className="max-w-7xl md:mx-auto flex items-center h-24 px-6 justify-between">
           <div className="flex items-center">
             <Image src="/logo.png" alt="Logo" width={80} height={50} className="object-contain" priority />
@@ -33,7 +33,7 @@ export const Header = () => {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.1 }}
-                  className="uppercase tracking-widest font-bold text-[13px] font-extrabold"
+                  className="uppercase tracking-widest text-[13px] font-extrabold"
                 >
                   <a href={item.href} className="text-white hover:text-red-500 transition-colors">
                     {item.label}
@@ -57,7 +57,7 @@ export const Header = () => {
       </header>
 
       {/* --- VERSION MOBILE (Flou Backdrop, Fixed) --- */}
-      <header className="lg:hidden fixed top-0 left-0 w-full z-[100] bg-black/60 backdrop-blur-md border-b border-white/10">
+      <header className="lg:hidden fixed top-0 left-0 w-full z-100 bg-black/60 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="relative  w-32 h-12">
             <Image src="/logo.png" alt="Logo" width={50} height={15} className="object-contain" priority />

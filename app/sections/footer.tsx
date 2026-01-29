@@ -41,7 +41,7 @@ export const Footer = () => {
         <motion.div className="flex flex-col lg:flex-row justify-between items-center lg:items-start gap-12 text-center lg:text-left" variants={item}>
           
           {/* LOGO : Masqué sur mobile avec 'hidden lg:block' */}
-          <div className="hidden lg:block flex-shrink-0">
+          <div className="hidden lg:block shrink-0">
             <Image src="/logo.png" alt="Logo" width={140} height={90} loading="lazy" />
           </div>
 

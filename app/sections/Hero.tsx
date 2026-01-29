@@ -40,7 +40,7 @@ export default function Hero() {
         />
         
         {/* DÉGRADÉ ADAPTATIF */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black md:bg-linear-to-r md:from-white md:via-white/90 md:to-transparent"></div>
+        <div className="absolute inset-0 bg-linear-to-b from-black/60 via-black/30 to-black md:bg-linear-to-r md:from-white md:via-white/90 md:to-transparent"></div>
       </div>
 
       <div className="container mx-auto px-6 md:px-12 z-10 w-full text-center md:text-left">

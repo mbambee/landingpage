@@ -26,7 +26,7 @@ export default function Services() {
   return (
     // Structure : flex-col (mobile) -> lg:flex-row (PC)
     // On centre le tout et on ajoute du padding pour que ça ne touche pas les bords
-    <section  className="py-20 bg-white flex flex-col lg:flex-row justify-center items-start gap-10 lg:gap-24 px-6 max-w-[1400px] mx-auto scroll-mt-40">
+    <section  className="py-20 bg-white flex flex-col lg:flex-row justify-center items-start gap-10 lg:gap-24 px-6 max-w-350 mx-auto scroll-mt-40">
       
       {/* --- BLOC SERVICES (GAUCHE SUR PC / HAUT SUR MOBILE) --- */}
       {/* w-full sur mobile, w-[700px] environ sur PC */}
@@ -75,7 +75,7 @@ export default function Services() {
 
       {/* --- BLOC CONTACT (DROITE SUR PC / BAS SUR MOBILE) --- */}
       {/* mt-12 pour espacer sur mobile, mt-30 comme tu avais sur PC */}
-      <div className='w-full lg:w-[450px] mt-12 lg:mt-30'>
+      <div className='w-full lg:w-112.5 mt-12 lg:mt-30'>
         <h1 className='text-3xl md:text-4xl uppercase font-extrabold text-black mb-8'>
           {t("faq.prompt")}
         </h1> 
