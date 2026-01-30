@@ -20,9 +20,9 @@ export default function Avis() {
     <section id='Avis' className="py-20 bg-[#FCF6F6] flex scroll-mt-40 overflow-hidden">
       <div className='bg-[#FCF6F6] flex flex-col mx-auto px-4 w-full max-w-7xl'>
         
-        <h2 className="text-3xl md:text-4xl text-center mb-12 text-black font-extrabold px-2">
+        <h1 className="text-3xl md:text-4xl text-center mb-12 text-black font-extrabold px-2">
           {t("avis.heading")}
-        </h2>
+        </h1>
 
         <FadeInUp>
           {/* On s'assure que ScrollLinked gère bien le débordement sur mobile */}

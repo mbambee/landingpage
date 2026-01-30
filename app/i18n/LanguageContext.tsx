@@ -48,7 +48,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "faq.prompt": "Vous ne trouvez pas votre réponse ?",
     "contact.heading": "Contactez-nous",
     "contact.subtitle": "Obtenez un devis gratuit",
-    "contact.paragraph": "Discutons de votre projet !Contactez-nous en envoyant un message, et notre équipe vous répondra dans un délai d'un jour ouvré. Que vous ayez des questions ou ayez besoin d'une solution sur mesure, nous sommes là pour vous aider à concrétiser votre vision.",
+    "contact.paragraph": "Discutons de votre projet ! Contactez-nous en envoyant un message, et notre équipe vous répondra dans un délai d'un jour ouvré. Que vous ayez des questions ou ayez besoin d'une solution sur mesure, nous sommes là pour vous aider à concrétiser votre vision.",
     "contact.label.name": "Nom",
     "contact.label.email": "Email",
     "contact.label.subject": "Sujet",

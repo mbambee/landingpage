@@ -31,9 +31,9 @@ export default function Services() {
       {/* --- BLOC SERVICES (GAUCHE SUR PC / HAUT SUR MOBILE) --- */}
       {/* w-full sur mobile, w-[700px] environ sur PC */}
       <div className='flex w-full lg:w-3/2 flex-col'>
-        <h2 className="text-3xl md:text-5xl tracking-tight text-slate-900 font-extrabold mb-5">
+        <h1 className="text-3xl md:text-5xl tracking-tight text-slate-900 font-extrabold mb-5">
           {t("services.heading")}
-        </h2>
+        </h1>
         <p className='text-gray-600 text-xl md:text-2xl'>
           {t("services.description")}
         </p>
@@ -53,9 +53,9 @@ export default function Services() {
                 whileTap={{ scale: 0.98 }}
               >
                 <div className="flex justify-between items-start">
-                  <h3 className={`font-bold text-lg md:text-xl uppercase transition-colors ${openIndex === index ? 'text-black' : 'text-gray-800'}`}>
+                  <h2 className={`font-bold text-lg md:text-xl uppercase transition-colors ${openIndex === index ? 'text-black' : 'text-gray-800'}`}>
                     {service.title}
-                  </h3>
+                  </h2>
                 </div>
 
                 <div

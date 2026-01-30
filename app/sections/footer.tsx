@@ -47,7 +47,7 @@ export const Footer = () => {
 
           {/* NEWSLETTER */}
             <motion.div variants={item} className="w-full max-w-sm">
-            <h4 className="text-sm font-semibold text-white uppercase tracking-wider">{t('footer.newsletter.title')}</h4>
+            <h1 className="text-sm font-semibold text-white uppercase tracking-wider">{t('footer.newsletter.title')}</h1>
             <p className="mt-4 text-sm text-gray-400">{t('footer.newsletter.desc')}</p>
             <div className="mt-4">
               <form action="https://formspree.io/f/xgokkkrn" method="post" className="flex">
@@ -67,7 +67,7 @@ export const Footer = () => {
 
           {/* ADRESSE */}
           <motion.div variants={item} className="flex flex-col">
-            <h1 className="text-red-500 font-bold uppercase mb-4">{t("contact.heading")}</h1>
+            <h2 className="text-red-500 font-bold uppercase mb-4">{t("contact.heading")}</h2>
             <address className="text-sm text-white  space-y-1">
               <div>Immeuble Centre Ibrahim,</div>
               <div>Av. Habib Bourguiba, Sousse 4000</div>

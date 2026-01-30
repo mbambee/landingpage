@@ -53,20 +53,20 @@ export default function ContactForm({ action, compact }: { action: string; compa
     <form method="POST" action={action} onSubmit={handleSubmit} className="relative">
       <div className="flex flex-col">
         <label htmlFor="name" className={labelClass}>{t('contact.label.name')}</label>
-        <input name="name" type="text" className={inputClass} />
+        <input id='name' name="name" type="text" className={inputClass} />
 
         <label htmlFor="email" className={labelClass}>{t('contact.label.email')}</label>
-        <input name="email" type="email" className={inputClass} required />
+        <input id='email' name="email" type="email" className={inputClass} required />
 
         {!compact && (
           <>
             <label htmlFor="subject" className={labelClass}>{t('contact.label.subject')}</label>
-            <input name="subject" type="text" className={inputClass} />
+            <input id='subject' name="subject" type="text" className={inputClass} />
           </>
         )}
 
         <label htmlFor="message" className={labelClass}>{t('contact.label.message')}</label>
-        <textarea name="message" className={inputClass} rows={4} required></textarea>
+        <textarea id='message' name="message" className={inputClass} rows={4} required></textarea>
 
         <div className="flex items-center gap-4">
           <motion.button

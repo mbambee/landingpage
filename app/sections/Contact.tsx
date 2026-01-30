@@ -18,8 +18,8 @@ export default function Contact() {
             {/* BLOC TEXTE ET RÉSEAUX : w-full sur mobile, lg:w-2xl sur PC */}
             <FadeInUp className='flex w-full lg:w-2xl flex-col h-full'>
                 <div className='flex flex-col'>
-                    <h2 className="text-3xl md:text-4xl mb-8 lg:mb-12 text-black uppercase font-extrabold">{t("contact.heading")}</h2>
-                    <h4 className="text-xl md:text-2xl font-semibold mb-4 text-black">{t("contact.subtitle")}</h4>
+                    <h1 className="text-3xl md:text-4xl mb-8 lg:mb-12 text-black uppercase font-extrabold">{t("contact.heading")}</h1>
+                    <h2 className="text-xl md:text-2xl font-semibold mb-4 text-black">{t("contact.subtitle")}</h2>
                     <p className='text-black text-lg md:text-2xl'>{t("contact.paragraph")}</p>
                     <br />
                 </div>

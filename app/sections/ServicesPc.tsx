@@ -23,7 +23,7 @@ export default function Services() {
 
         <section  className="py-20 bg-white flex scroll-mt-40">
             <div className='flex  w-3xl  flex-col   mx-auto px-4 '>
-                <h2 className="text-3xl md:text-5xl tracking-tight text-slate-900 font-extrabold mb-5">{t("services.heading")}</h2>
+                <h1 className="text-3xl md:text-5xl tracking-tight text-slate-900 font-extrabold mb-5">{t("services.heading")}</h1>
                 <p className='text-gray-600 text-2xl'>{t("services.description")}</p><br />
                 <div className=" space-y-4 gap-4 p-6 -mx-8">
                     {service.map((service, index) => (
@@ -39,9 +39,9 @@ export default function Services() {
                                 whileTap={{ scale: 0.97 }}
                             >
                                 <div className="flex justify-between items-start">
-                                    <h3 className={`font-bold text-xl uppercase transition-colors ${openIndex === index ? 'text-black' : 'text-gray-800'}`}>
+                                    <h2 className={`font-bold text-xl uppercase transition-colors ${openIndex === index ? 'text-black' : 'text-gray-800'}`}>
                                         {service.title}
-                                    </h3>
+                                    </h2>
                                 </div>
                                 <div
                                     className={`transition-all duration-300 ease-in-out overflow-hidden ${openIndex === index ? 'max-h-40 opacity-100 mt-4' : 'max-h-0 opacity-0'}`}>
